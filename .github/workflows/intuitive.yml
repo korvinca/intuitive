@@ -1,5 +1,5 @@
 name: Check Terraform for Intuitive
-run-name: ${{ github.actor }} is CICD for Intuitive
+run-name: ${{ github.actor }} is CICD for Intuitive.
 on: [push]
 
 jobs:
