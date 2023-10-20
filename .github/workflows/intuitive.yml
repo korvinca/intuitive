@@ -21,22 +21,22 @@ jobs:
         cd terraform_aws
         terraform init
 
-    # - name: Terraform Validate
-    #   run: |
-    #     cd terraform_aws
-    #     terraform validate
-    #     terraform fmt
-    #     tflint
+    - name: Terraform Validate
+      run: |
+        cd terraform_aws
+        terraform validate
+        terraform fmt
+        tflint
 
-    # - name: Terraform Plan
-    #   run: |
-    #     cd terraform_aws
-    #     terraform plan -input=false -out=tfplan
+    - name: Terraform Plan
+      run: |
+        cd terraform_aws
+        terraform plan -input=false -out=tfplan
 
-    # - name: Security Scanning
-    #   run: |
-    #     cd terraform_aws
-    #     tfsec tfplan
+    - name: Security Scanning
+      run: |
+        cd terraform_aws
+        tfsec tfplan
 
     # # - name: Terraform Apply
     # #   run: |
