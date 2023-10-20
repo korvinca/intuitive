@@ -2,7 +2,7 @@ name: Check Terraform for Intuitive
 run-name: ${{ github.actor }} is CICD test for Intuitive
 
 on:  
-  # push:
+  # push: ## Comment it to avoid running on any commit
   pull_request:
     branches:
       - main
@@ -35,16 +35,25 @@ jobs:
 
     - name: Terraform Plan
       run: |
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         cd terraform_aws
         terraform plan -input=false -out=tfplan
 
     - name: Security Scanning
       run: |
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         cd terraform_aws
         tfsec tfplan
 
     - name: Terraform Apply
       run: |
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         cd terraform_aws
         terraform apply -input=false tfplan
       env:
@@ -52,5 +61,8 @@ jobs:
 
     - name: Cleanup
       run: |
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         cd terraform_aws
         terraform destroy -auto-approve
