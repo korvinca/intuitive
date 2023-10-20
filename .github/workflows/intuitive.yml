@@ -1,8 +1,8 @@
 name: Check Terraform for Intuitive
 run-name: ${{ github.actor }} is CICD test for Intuitive
-# on: [push]
+
 on:  
-  push:
+  # push:
   pull_request:
     branches:
       - main
