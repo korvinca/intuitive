@@ -1,8 +1,14 @@
 name: Check Terraform for Intuitive
-run-name: ${{ github.actor }} is CICD for Intuitive
-on: [push]
+run-name: ${{ github.actor }} is CICD test for Intuitive
+# on: [push]
+on:  
+  push:
+  pull_request:
+    branches:
+      - main
 
 jobs:
+
   terraform:
     name: Terraform Actions
     runs-on: ubuntu-latest
@@ -37,14 +43,14 @@ jobs:
         cd terraform_aws
         tfsec tfplan
 
-    # # - name: Terraform Apply
-    # #   run: |
-    # #     cd terraform_aws
-    # #     terraform apply -input=false tfplan
-    # #   env:
-    # #     TF_CLI_ARGS: "-input=false"
+    - name: Terraform Apply
+      run: |
+        cd terraform_aws
+        terraform apply -input=false tfplan
+      env:
+        TF_CLI_ARGS: "-input=false"
 
-    # # - name: Cleanup
-    # #   run: |
-    # #     cd terraform_aws
-    # #     terraform destroy -auto-approve
+    - name: Cleanup
+      run: |
+        cd terraform_aws
+        terraform destroy -auto-approve
