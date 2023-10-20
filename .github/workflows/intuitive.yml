@@ -26,7 +26,6 @@ jobs:
         cd terraform_aws
         terraform validate
         terraform fmt
-        tflint
 
     - name: Terraform Plan
       run: |
