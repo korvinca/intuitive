@@ -1,0 +1,54 @@
+name: Check Terraform for Intuitive
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  terraform:
+    name: Terraform Actions
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: "1.1.7"
+
+    - name: Terraform Init
+      run: |
+        cd terraform_aws
+        terraform init
+
+    - name: Terraform Validate
+      run: |
+        cd terraform_aws
+        terraform validate
+        terraform fmt
+        tflint
+
+    - name: Terraform Plan
+      run: |
+        cd terraform_aws
+        terraform plan -input=false -out=tfplan
+
+    - name: Security Scanning
+      run: |
+        cd terraform_aws
+        tfsec tfplan
+
+    # - name: Terraform Apply
+    #   run: |
+    #     cd terraform_aws
+    #     terraform apply -input=false tfplan
+    #   env:
+    #     TF_CLI_ARGS: "-input=false"
+
+    # - name: Cleanup
+    #   run: |
+    #     cd terraform_aws
+    #     terraform destroy -auto-approve
