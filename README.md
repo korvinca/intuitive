@@ -1,8 +1,19 @@
+## Terraform
+
+* Setup AWS credentials on the host
+* Then run command below:
+
+```bash
+cd terraform_aws
+terraform init
+terraform plan
+terraform apply
+#terraform destroy
+```
+
 ## Docker
 
-No changes in main Docker file. All works by default.
 Commands to create and push image are below.
-Image avaliable to pull from korvinca/intuitive:latest
 
 ```bash
  cd intuitive
@@ -20,3 +31,4 @@ Image avaliable to pull from korvinca/intuitive:latest
  docker image push korvinca/intuitive:latest
 ```
 
+Image is avaliable to pull as korvinca/intuitive:latest
