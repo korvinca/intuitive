@@ -1,9 +1,6 @@
 name: Check Terraform for Intuitive
-
-on:
-  push:
-    branches:
-      - main 
+run-name: ${{ github.actor }} is CICD for Intuitive
+on: [push]
 
 jobs:
   terraform:
